@@ -6,9 +6,8 @@ boolean CirclevsCircle(Manifold m){
   PVector n = PVector.sub(B.pos, A.pos);
   
   float r = A.radius + B.radius;
-  r *= r;
   //square n scala
-  if(PVector.dot(n, n) > r)
+  if(PVector.dot(n, n) > r * r)
     return false;
     
   //Calculate have collided, now compute manifold

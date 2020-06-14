@@ -8,8 +8,8 @@ Object A, B;
 void setup(){
   size(500, 500);
   //             pos                                     vel                mass restitution radius
-  A = new Circle(new PVector(width/2-width/4, height/2), new PVector(10, 5), 4, 1, 100);
-  B = new Circle(new PVector(width/2+width/4, height/2), new PVector(-10, -1), 1, 1, 50);
+  A = new AABB(200, 200, new PVector(width/2-width/4, height/2), new PVector(10, 5), 4, 1);
+  B = new AABB(100, 100, new PVector(width/2+width/4, height/2), new PVector(-10, -1), 1, 1);
 }
 
 void draw(){
@@ -17,7 +17,7 @@ void draw(){
   A.update();
   B.update();
   Manifold m = new Manifold(A, B);
-  if(CirclevsCircle(m)){
+  if(AABBvsAABB(m)){
     ResolveCollision(m);
     PositionalCorrection(m);
   }

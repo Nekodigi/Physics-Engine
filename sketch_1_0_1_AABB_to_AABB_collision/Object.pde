@@ -24,12 +24,38 @@ abstract class Object{
 class Circle extends Object{
   float radius;
   
-  Circle(PVector pos, PVector vel, float mass, float restitution, float radius){
+  Circle(float radius, PVector pos, PVector vel, float mass, float restitution){
     super(pos, vel, mass, restitution);
     this.radius = radius;
   }
   
   void show(){
     ellipse(pos.x, pos.y, radius*2, radius*2);
+  }
+}
+
+class AABB extends Object{
+  float w, h;
+  
+  AABB(PVector min, PVector max, PVector vel, float mass, float restitution){
+    super(PVector.add(min, max).div(2), vel, mass, restitution);
+  }
+ 
+  AABB(float w, float h, PVector pos, PVector vel, float mass, float restitution){
+    super(pos, vel, mass, restitution);
+    this.w = w;
+    this.h = h;
+  }
+  
+  PVector getMin(){
+    return PVector.sub(pos, new PVector(w/2, h/2));
+  }
+  
+  PVector getMax(){
+    return PVector.add(pos, new PVector(w/2, h/2));
+  }
+  
+  void show(){
+    rect(pos.x-w/2, pos.y-h/2, w, h);
   }
 }
